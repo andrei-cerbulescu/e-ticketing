@@ -1,5 +1,6 @@
 package eticketing;
 
-public class bilet {
+public class ticket {
     private client thisClient;
+
 }
