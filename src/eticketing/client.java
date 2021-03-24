@@ -17,6 +17,11 @@ public class client extends person {
 
     }
 
+    client(){
+        lastID++;
+        this.ID=lastID;
+    }
+
     public Vector<ticket> getTickets() {
         return tickets;
     }
