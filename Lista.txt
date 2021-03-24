@@ -1,0 +1,14 @@
+M-am hotărât ca aplicația mea să am următoarele tipuri de obiecte:
+artist, avenue, band, client, event, group, person, ticket
+
+Se vor putea face urmatoarele interogari/acțiuni:
+1.Adăugarea/eliminarea unui client la un grup
+2.Achizitionarea de bilete
+3.Transferarea unui bilet la o altă persoană
+4.Crearea de evenimente
+5.Adăugarea unei bande sau a unui artist la un eveniment
+6.Anularea unui eveniment și anularea tuturor biletelor asociate cu acesta
+7.Adăugarea/eliminarea unui artist la o trupă
+8.Verificarea ca un client să îndeplinească o anumită vârstă la cumpărarea biletului
+9.Ștergerea unui client și a tuturor biletelor sale
+10.Posibilitatea de a transfera un artist de la o trupă la alta

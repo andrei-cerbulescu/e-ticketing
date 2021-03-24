@@ -1,7 +1,23 @@
 package eticketing;
 
-public class client {
+import java.util.Vector;
 
-    private ticket[] tickets;
+public class client extends person {
 
+    private Vector<ticket> tickets;
+    private static int lastID=0;
+
+    client(String name, String surname, int age){
+
+        lastID++;
+        this.ID=lastID;
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+
+    }
+
+    public Vector<ticket> getTickets() {
+        return tickets;
+    }
 }

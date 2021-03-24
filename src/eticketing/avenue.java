@@ -8,4 +8,11 @@ public class avenue {
     public int getMaxSpectators(){
         return(maxSpectators);
     }
+
+    avenue(String locationName, int maxSPectators, int minAge){
+        this.locationName=locationName;
+        this.maxSpectators=maxSPectators;
+        this.minAge=minAge;
+    }
+
 }
