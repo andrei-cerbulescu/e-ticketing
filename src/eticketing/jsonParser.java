@@ -19,7 +19,7 @@ public class jsonParser {
         String dataString = "";
 
         try {
-            objReader = new BufferedReader(new FileReader("data.json"));
+            objReader = new BufferedReader(new FileReader("clientData.json"));
             while ((strCurrentLine = objReader.readLine()) != null) {
 
                 dataString+=strCurrentLine;
@@ -37,6 +37,37 @@ public class jsonParser {
         Vector<client> listOfClients = new Vector<client>(Arrays.asList(gsonData));
 
         return(listOfClients);
+
+    }
+
+    public static Vector<avenue> readAvenues(){
+
+        Gson gson = new Gson();
+        Object dataObject = null;
+
+        String strCurrentLine;
+        BufferedReader objReader;
+        String dataString = "";
+
+        try {
+            objReader = new BufferedReader(new FileReader("avenueJson.json"));
+            while ((strCurrentLine = objReader.readLine()) != null) {
+
+                dataString+=strCurrentLine;
+            }
+            objReader.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        avenue[] gsonData = new Gson().fromJson(dataString, avenue[].class);
+
+        Vector<avenue> avenueList = new Vector<avenue>(Arrays.asList(gsonData));
+
+        return(avenueList);
 
     }
 

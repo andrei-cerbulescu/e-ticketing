@@ -7,7 +7,9 @@ public class main {
     public static void main(String[] args) {
 
         Vector<client> clients = jsonParser.readClients();
-        avenueList.addAvenue(new avenue("Gara de Nord", 100, 0));
+        avenueList.setAvenueVector(jsonParser.readAvenues());
+
+        Vector<avenue> test = avenueList.getAvenueVector();
 
     }
 }

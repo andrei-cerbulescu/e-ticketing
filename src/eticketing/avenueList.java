@@ -13,4 +13,8 @@ public class avenueList {
     public static Vector<avenue> getAvenueVector() {
         return avenueVector;
     }
+
+    public static void setAvenueVector(Vector<avenue> avenueVector) {
+        avenueList.avenueVector = avenueVector;
+    }
 }

@@ -1,0 +1,15 @@
+[
+
+{
+	"locationName":"test",
+	"maxSpectators":100,
+	"minAge":0
+},
+{
+	"locationName":"test2",
+	"maxSpectators":100,
+	"minAge":18
+}
+
+
+]
