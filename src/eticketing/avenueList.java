@@ -17,4 +17,8 @@ public class avenueList {
     public static void setAvenueVector(Vector<avenue> avenueVector) {
         avenueList.avenueVector = avenueVector;
     }
+
+    private avenueList(){
+        //Nu este instantiabil
+    }
 }

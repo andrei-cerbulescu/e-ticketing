@@ -9,6 +9,10 @@ import java.util.Vector;
 
 public class jsonParser {
 
+    private jsonParser(){
+        //Nu e instantiabil
+    }
+
     public static Vector<client> readClients (){
 
         Gson gson = new Gson();
