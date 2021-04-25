@@ -19,16 +19,16 @@ public class csvParser {
     private static Vector<artist> artistVector;
     private static Vector<band> bandVector;
 
-    public static void setClientVector(Vector<client> clientVector) {
-        csvParser.clientVector = clientVector;
+    public static Vector<client> getClientVector() {
+        return clientVector;
     }
 
-    public static void setAvenueVector(Vector<avenue> avenueVector) {
-        csvParser.avenueVector = avenueVector;
+    public static Vector<avenue> getAvenueVector() {
+        return avenueVector;
     }
 
-    public static void setArtistVector(Vector<artist> artistVector) {
-        csvParser.artistVector = artistVector;
+    public static Vector<artist> getArtistVector() {
+        return artistVector;
     }
 
     public static Vector<band> getBandVector() {
