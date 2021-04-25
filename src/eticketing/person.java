@@ -19,4 +19,9 @@ public class person {
     public String getSurname() {
         return surname;
     }
+
+    @Override
+    public String toString(){
+        return this.name+" "+this.surname;
+    }
 }

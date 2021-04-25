@@ -29,6 +29,8 @@ public class actions {
                     bw.close();
 
                     csvParser.getClientVector().add(newClient);
+
+                    logger.writeToAudit("Added "+newClient);
                 }
 
             }

@@ -6,7 +6,7 @@ Se vor putea face urmatoarele interogari/acțiuni:
 2.Achizitionarea de bilete
 3.Transferarea unui bilet la o altă persoană
 4.Crearea de evenimente
-5.Adăugarea unei bande sau a unui artist la un eveniment
+5.Adăugarea unei trupe sau a unui artist la un eveniment
 6.Anularea unui eveniment și anularea tuturor biletelor asociate cu acesta
 7.Adăugarea/eliminarea unui artist la o trupă
 8.Verificarea ca un client să îndeplinească o anumită vârstă la cumpărarea biletului
