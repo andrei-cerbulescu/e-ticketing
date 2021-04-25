@@ -12,6 +12,7 @@
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/dependencies/gson-2.8.6.jar!/" />
+          <root url="jar://$MODULE_DIR$/dependencies/commons-csv-1.8.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

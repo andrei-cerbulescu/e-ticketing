@@ -12,11 +12,11 @@ public class avenue {
         return(maxSpectators);
     }
 
-    avenue(String locationName, int maxSPectators, int minAge){
+    avenue(String locationName, int maxSpectators, int minAge){
         lastID++;
         this.ID = lastID;
         this.locationName=locationName;
-        this.maxSpectators=maxSPectators;
+        this.maxSpectators=maxSpectators;
         this.minAge=minAge;
     }
 
