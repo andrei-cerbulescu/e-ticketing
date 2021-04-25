@@ -1,6 +1,5 @@
 package eticketing;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
@@ -17,7 +16,7 @@ public class actions {
             while (true) {
 
                 int decission;
-                System.out.println("1. Add a new client");
+                System.out.println("1. Add a new client \n2.Create a group \n3.Add person to group");
 
                 decission = Integer.parseInt(reader.nextLine());
 
@@ -28,11 +27,32 @@ public class actions {
                     bw.write("\n"+newClient.name+","+newClient.surname+","+newClient.age);
                     bw.close();
 
-                    csvParser.getClientVector().add(newClient);
+                    vectorWrapper.getClientVector().add(newClient);
 
                     logger.writeToAudit("Added "+newClient);
                 }
 
+                if(decission == 2){
+
+                    group newGroup = new group();
+                    vectorWrapper.getGroups().add(newGroup);
+                    logger.writeToAudit("New group created");
+
+                }
+
+                if(decission == 3){
+
+                    System.out.println("Group index:");
+                    int groupIndex, personIndex;
+                    groupIndex = Integer.parseInt(reader.nextLine());
+                    System.out.println("Person Index:");
+                    personIndex = Integer.parseInt(reader.nextLine());
+
+                    vectorWrapper.getGroups().elementAt(groupIndex).getClients().add(vectorWrapper.getClientVector().elementAt(personIndex));
+
+                    logger.writeToAudit(vectorWrapper.getClientVector().elementAt(personIndex)+" added to group with index "+groupIndex);
+
+                }
             }
         }
         catch(Exception e){

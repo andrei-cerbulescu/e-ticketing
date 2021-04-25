@@ -14,34 +14,6 @@ public class csvParser {
 
     }
 
-    private static Vector<client> clientVector;
-    private static Vector<avenue> avenueVector;
-    private static Vector<artist> artistVector;
-    private static Vector<band> bandVector;
-
-    public static Vector<client> getClientVector() {
-        return clientVector;
-    }
-
-    public static Vector<avenue> getAvenueVector() {
-        return avenueVector;
-    }
-
-    public static Vector<artist> getArtistVector() {
-        return artistVector;
-    }
-
-    public static Vector<band> getBandVector() {
-        return bandVector;
-    }
-
-    public static void initVectors(){
-        clientVector = readClients();
-        avenueVector = readAvenues();
-        artistVector = readArtists();
-        bandVector = readBands();
-    }
-
     public static Vector<client> readClients(){
 
         Vector<client> clients = new Vector<>();
