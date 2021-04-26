@@ -39,7 +39,7 @@ public class vectorWrapper {
         avenueVector = csvParser.readAvenues();
         artistVector = csvParser.readArtists();
         bandVector = csvParser.readBands();
-        eventVector = new Vector<event>();
+        eventVector = csvParser.readEvents();
     }
 
 }

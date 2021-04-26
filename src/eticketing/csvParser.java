@@ -104,5 +104,40 @@ public class csvParser {
 
     }
 
+    public static Vector<event> readEvents(){
+        Vector<event> events = new Vector<>();
+
+        try (Reader in = new FileReader("eventData.csv")) {
+
+            Iterable<CSVRecord> records = CSVFormat.DEFAULT
+                    .withHeader(new String[]{"location, eventName"})
+                    .withFirstRecordAsHeader()
+                    .parse(in);
+            for (CSVRecord record : records){
+
+                avenue respectiveAvenue = null;
+                for (int i = 0; i < vectorWrapper.getAvenueVector().size(); i++) {
+
+                    if(vectorWrapper.getAvenueVector().elementAt(i).getLocationName().equals(record.get("location"))){
+                        respectiveAvenue = vectorWrapper.getAvenueVector().elementAt(i);
+
+                        break;
+                    }
+
+                }
+
+                if(respectiveAvenue!=null){
+                    event newEvent = new event(respectiveAvenue ,record.get("eventName"));
+                    events.add(newEvent);
+                }
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return events;
+    }
+
 
 }

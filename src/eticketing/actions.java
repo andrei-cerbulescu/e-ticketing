@@ -16,7 +16,7 @@ public class actions {
             while (true) {
 
                 int decission;
-                System.out.println("1. Add a new client \n2.Create a group \n3.Add person to group \n4.Remove person from group \n5.Buy a ticket \n6.Transfer a ticket \n7.Create an event \n8.Add an artist/band to the event \n9.Cancel an event \n10.Add/remove an artist from a band");
+                System.out.println("1.Add a new client \n2.Create a group \n3.Add person to group \n4.Remove person from group \n5.Buy a ticket \n6.Transfer a ticket \n7.Create an event \n8.Add an artist/band to the event \n9.Cancel an event \n10.Add/remove an artist from a band");
 
                 decission = Integer.parseInt(reader.nextLine());
 
