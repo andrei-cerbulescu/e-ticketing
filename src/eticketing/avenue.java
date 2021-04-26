@@ -25,4 +25,14 @@ public class avenue {
         this.ID = lastID;
     }
 
+    public String getLocationName() {
+        return locationName;
+    }
+
+    @Override
+    public String toString(){
+        return this.locationName;
+    }
+
+
 }

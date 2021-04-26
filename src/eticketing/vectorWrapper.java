@@ -8,6 +8,7 @@ public class vectorWrapper {
     private static Vector<avenue> avenueVector;
     private static Vector<artist> artistVector;
     private static Vector<band> bandVector;
+    private static Vector<event> eventVector;
 
     public static Vector<group> getGroups() {
         return groups;
@@ -29,11 +30,16 @@ public class vectorWrapper {
         return bandVector;
     }
 
+    public static Vector<event> getEventVector() {
+        return eventVector;
+    }
+
     public static void initVectors(){
         clientVector = csvParser.readClients();
         avenueVector = csvParser.readAvenues();
         artistVector = csvParser.readArtists();
         bandVector = csvParser.readBands();
+        eventVector = new Vector<event>();
     }
 
 }

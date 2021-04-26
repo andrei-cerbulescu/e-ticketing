@@ -16,4 +16,7 @@ public class ticket {
 
     }
 
+    public void setThisClient(client thisClient) {
+        this.thisClient = thisClient;
+    }
 }

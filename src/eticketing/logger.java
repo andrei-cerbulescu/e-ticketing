@@ -6,6 +6,10 @@ import java.text.SimpleDateFormat;
 
 public class logger {
 
+    private logger(){
+
+    }
+
     public static void writeToAudit(String eventName){
 
         try{
