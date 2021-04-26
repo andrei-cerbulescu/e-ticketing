@@ -19,4 +19,8 @@ public class band {
 
     }
 
+    public void removeArtistAtPosition(int position){
+        artists.remove(position);
+    }
+
 }

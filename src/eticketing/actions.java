@@ -16,7 +16,7 @@ public class actions {
             while (true) {
 
                 int decission;
-                System.out.println("1. Add a new client \n2.Create a group \n3.Add person to group \n4.Remove person from group \n5.Buy a ticket \n6.Transfer a ticket \n7.Create an event \n8.Add an artist/band to the event.");
+                System.out.println("1. Add a new client \n2.Create a group \n3.Add person to group \n4.Remove person from group \n5.Buy a ticket \n6.Transfer a ticket \n7.Create an event \n8.Add an artist/band to the event \n9.Cancel an event \n10.Add/remove an artist from a band");
 
                 decission = Integer.parseInt(reader.nextLine());
 
@@ -133,6 +133,48 @@ public class actions {
                     if(newDecission==2){
                         vectorWrapper.getEventVector().elementAt(eventIndex).addArtistBand(vectorWrapper.getBandVector().elementAt(index));
                         logger.writeToAudit(vectorWrapper.getBandVector().elementAt(index)+ " was added to event "+vectorWrapper.getEventVector().elementAt(eventIndex));
+                    }
+
+                }
+                if(decission==9){
+                    System.out.println("Event index:");
+                    int eventIndex = Integer.parseInt(reader.nextLine());
+
+                    for (client curentClient:vectorWrapper.getClientVector()
+                         ) {
+
+                        for(int i=0;i<curentClient.getTickets().size();i++){
+                            if(curentClient.getTickets().elementAt(i).getThisEvent()==vectorWrapper.getEventVector().elementAt(eventIndex)){
+                                curentClient.getTickets().remove(i);
+                                i--;
+                            }
+                        }
+
+                    }
+
+                    vectorWrapper.getEventVector().remove(eventIndex);
+
+                }
+
+                if(decission==10){
+
+                    System.out.println("1.Add an artist to a band\n2.Remove an artist from a band");
+
+                    int decission2 = Integer.parseInt(reader.nextLine());
+                    if(decission2==1){
+                        System.out.println("Input artist index:");
+                        int artistIndex = Integer.parseInt(reader.nextLine());
+                        System.out.println("Input band index:");
+                        int bandIndex = Integer.parseInt(reader.nextLine());
+                        vectorWrapper.getBandVector().elementAt(bandIndex).addArtist(vectorWrapper.getArtistVector().elementAt(artistIndex));
+                    }
+
+                    if(decission2==2){
+                        System.out.println("Input band index:");
+                        int bandIndex = Integer.parseInt(reader.nextLine());
+                        System.out.println("Input artist number in band:");
+                        int artistIndex = Integer.parseInt(reader.nextLine());
+                        vectorWrapper.getBandVector().elementAt(bandIndex).removeArtistAtPosition(artistIndex);
                     }
 
                 }

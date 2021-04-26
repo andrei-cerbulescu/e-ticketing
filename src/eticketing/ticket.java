@@ -16,6 +16,10 @@ public class ticket {
 
     }
 
+    public event getThisEvent() {
+        return thisEvent;
+    }
+
     public void setThisClient(client thisClient) {
         this.thisClient = thisClient;
     }
