@@ -22,6 +22,13 @@ public class client extends person {
         this.ID=lastID;
     }
 
+    public void deleteTickets(){
+        while(this.tickets.size()>0){
+            this.tickets.remove(0);
+        }
+        tickets=null;
+    }
+
     public Vector<ticket> getTickets() {
         return tickets;
     }

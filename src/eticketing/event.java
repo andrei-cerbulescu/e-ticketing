@@ -31,6 +31,10 @@ public class event {
         return this.eventName;
     }
 
+    public avenue getLocation() {
+        return location;
+    }
+
     void addArtistBand(artist toBeAdded){
         this.artistVector.add(toBeAdded);
     }

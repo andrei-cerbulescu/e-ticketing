@@ -29,6 +29,10 @@ public class avenue {
         return locationName;
     }
 
+    public int getMinAge() {
+        return minAge;
+    }
+
     @Override
     public String toString(){
         return this.locationName;

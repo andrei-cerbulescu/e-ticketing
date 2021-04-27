@@ -19,6 +19,10 @@ public class band {
 
     }
 
+    public artist getArtistAtPosition(int position){
+        return this.artists.elementAt(position);
+    }
+
     public void removeArtistAtPosition(int position){
         artists.remove(position);
     }
