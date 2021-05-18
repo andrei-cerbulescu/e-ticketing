@@ -1,0 +1,56 @@
+DROP DATABASE IF EXISTS aplicatie;
+create DATABASE aplicatie;
+
+USE aplicatie;
+
+CREATE TABLE CLIENTS(
+
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(30) NOT NULL,
+surname VARCHAR(30) NOT NULL,
+age INT UNSIGNED
+
+);
+
+CREATE TABLE ARTISTS(
+
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(30) NOT NULL,
+surname VARCHAR(30) NOT NULL,
+age INT UNSIGNED NOT NULL
+
+);
+
+CREATE TABLE AVENUES(
+
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+avenue VARCHAR(30) NOT NULL,
+maxSpectators INT UNSIGNED NOT NULL,
+minAge INT UNSIGNED NOT NULL
+
+);
+
+CREATE TABLE BANDS(
+
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(30) NOT NULL
+
+);
+
+CREATE TABLE LOGS(
+
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+eventName VARCHAR(60) NOT NULL,
+timestamp VARCHAR(60) NOT NULL
+
+);
+
+INSERT INTO clients (NAME, surname, age) VALUES ("DbClientName1", "DbClientSurname1", 21);
+INSERT INTO bands (NAME) VALUES ("DbBand1");
+INSERT INTO avenues (avenue, maxSpectators, minAge) VALUES ("DbAvenue1", 100, 1);
+INSERT INTO artists (NAME, surname, age) VALUES ("DbArtistName1", "DbArtistSurname1", 21);
+
+INSERT INTO clients (NAME, surname, age) VALUES ("DbClientName2", "DbClientSurname2", 22);
+INSERT INTO bands (NAME) VALUES ("DbBand1");
+INSERT INTO avenues (avenue, maxSpectators, minAge) VALUES ("DbAvenue2", 102, 2);
+INSERT INTO artists (NAME, surname, age) VALUES ("DbArtistName2", "DbArtistSurname2", 32);

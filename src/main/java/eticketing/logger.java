@@ -2,6 +2,9 @@ package eticketing;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 public class logger {
@@ -32,6 +35,19 @@ public class logger {
             e.printStackTrace();
         }
 
+        String sql = "INSERT INTO LOGS (eventName, timestamp) VALUES (?,?)";
+        Connection connection = DbConnection.getDataBaseConnection();
+
+        try{
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, eventName);
+            statement.setString(2, new SimpleDateFormat("yyyy.MM.dd HH.mm.ss").format(new java.util.Date()));
+
+            statement.executeUpdate();
+        }
+        catch (SQLException exception){
+            System.err.println("Cannot insert into table");
+        }
 
     }
 
