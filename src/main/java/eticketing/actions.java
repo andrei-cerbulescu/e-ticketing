@@ -3,6 +3,8 @@ package eticketing;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Scanner;
 
 public class actions {
@@ -16,7 +18,7 @@ public class actions {
             while (true) {
 
                 int decission;
-                System.out.println("1.Add a new client \n2.Create a group \n3.Add person to group \n4.Remove person from group \n5.Buy a ticket \n6.Transfer a ticket \n7.Create an event \n8.Add an artist/band to the event \n9.Cancel an event \n10.Add/remove an artist from a band \n11.Delete a client \n12.Transfer an artist");
+                System.out.println("1.Add a new client \n2.Create a group \n3.Add person to group \n4.Remove person from group \n5.Buy a ticket \n6.Transfer a ticket \n7.Create an event \n8.Add an artist/band to the event \n9.Cancel an event \n10.Add/remove an artist from a band \n11.Delete a client \n12.Transfer an artist \n13.Database commands");
 
                 decission = Integer.parseInt(reader.nextLine());
 
@@ -217,12 +219,106 @@ public class actions {
 
                 }
 
+                if(decission==13){
+                    dbDecissions();
+                }
+
             }
         }
         catch(Exception e){
             e.printStackTrace();
         }
 
+    }
+
+    public static void dbDecissions(){
+
+        Scanner reader = new Scanner(new InputStreamReader(System.in));
+
+        while(true){
+
+            System.out.println("1.Create\n2.Read\n3.Update\n4.Delete");
+            int decission = Integer.parseInt(reader.nextLine());
+
+            if(decission == 3){
+                sqlUpdate();
+            }
+
+            if(decission == 2 || decission == 4){
+                System.out.println("Choose:\nCLIENTS\nARTISTS\nAVENUES\nBANDS");
+                String sql = "";
+                if(decission == 2){
+                    sql = "SELECT * FROM "+ reader.nextLine();
+                    sqlRead(sql);
+                }
+
+                else{
+                    try{
+                        sql = "DELETE FROM "+ reader.nextLine() + " WHERE id = ";
+                        System.out.println("Input ID");
+                        sql = sql + reader.nextLine();
+                        System.out.println(sql);
+                        DbConnection.getDataBaseConnection().createStatement().execute(sql);
+                    }
+                    catch(Exception e){
+                        e.printStackTrace();
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+    public static void sqlRead(String sql){
+        try{
+            Statement stmt = DbConnection.getDataBaseConnection().createStatement();
+            ResultSet result = stmt.executeQuery(sql);
+            System.out.println("\n");
+
+            while(result.next()){
+                for(int i=1;i<=result.getMetaData().getColumnCount();i++){
+                    System.out.print(result.getString(i)+" ");
+                }
+                System.out.print("\n");
+            }
+            System.out.print("\n");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void sqlUpdate(){
+        Scanner reader = new Scanner(new InputStreamReader(System.in));
+        System.out.println("Choose:\nCLIENTS\nARTISTS\nAVENUES\nBANDS");
+        String sql = "UPDATE "+ reader.nextLine()+" SET ";
+
+        System.out.println("Number of columns you want to update:");
+        int numberOfColumns = Integer.parseInt(reader.nextLine());
+        for(int i=0;i<numberOfColumns;i++){
+            System.out.println("Column name: ");
+            sql+= reader.nextLine()+" = ";
+
+            System.out.println("New value: ");
+            sql+= '"'+reader.nextLine()+'"';
+            if(i != numberOfColumns-1){
+                sql+=", ";
+            }
+        }
+
+        sql +=" WHERE id = ";
+        System.out.println("Insert id: ");
+        sql+=reader.nextLine();
+        System.out.println(sql);
+        try {
+            DbConnection.getDataBaseConnection().createStatement().execute(sql);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 }
