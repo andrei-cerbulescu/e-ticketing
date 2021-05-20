@@ -3,6 +3,7 @@ package eticketing;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
@@ -244,8 +245,12 @@ public class actions {
                 sqlUpdate();
             }
 
+            if(decission == 1){
+                insertDb();
+            }
+
             if(decission == 2 || decission == 4){
-                System.out.println("Choose:\nCLIENTS\nARTISTS\nAVENUES\nBANDS");
+                printAllTables();
                 String sql = "";
                 if(decission == 2){
                     sql = "SELECT * FROM "+ reader.nextLine();
@@ -293,7 +298,7 @@ public class actions {
 
     public static void sqlUpdate(){
         Scanner reader = new Scanner(new InputStreamReader(System.in));
-        System.out.println("Choose:\nCLIENTS\nARTISTS\nAVENUES\nBANDS");
+        printAllTables();
         String sql = "UPDATE "+ reader.nextLine()+" SET ";
 
         System.out.println("Number of columns you want to update:");
@@ -319,6 +324,60 @@ public class actions {
         catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    public static void printAllTables(){
+        try{
+            ResultSet result = DbConnection.getDataBaseConnection().createStatement().executeQuery("SHOW TABLES");
+            while(result.next()){
+                System.out.println(result.getString(1));
+            }
+        }
+        catch(Exception e){
+            System.out.println("Couldn't get the tables!");
+        }
+    }
+
+    public static void insertDb(){
+
+        System.out.println("Choose a table to insert into.");
+        Scanner reader = new Scanner(new InputStreamReader(System.in));
+        printAllTables();
+        String table = reader.nextLine();
+        String sql = "SELECT * FROM "+table+" WHERE id = -1";
+        try{
+            ResultSet results = DbConnection.getDataBaseConnection().createStatement().executeQuery(sql);
+
+            sql = "INSERT INTO "+table+" (";
+
+            for(int i=2;i<=results.getMetaData().getColumnCount();i++){
+                sql+=results.getMetaData().getColumnName(i);
+
+                if(i!=results.getMetaData().getColumnCount()){
+                    sql+=", ";
+                }
+            }
+
+            sql+=") VALUES (";
+
+            for(int i=2;i<=results.getMetaData().getColumnCount();i++){
+                System.out.println("Insert value for "+results.getMetaData().getColumnName(i));
+                sql+='"'+reader.nextLine()+'"';
+
+                if(i!=results.getMetaData().getColumnCount()){
+                    sql+=", ";
+                }
+            }
+            sql+=")";
+            System.out.println(sql);
+            DbConnection.getDataBaseConnection().createStatement().executeUpdate(sql);
+
+        }
+        catch(Exception e){
+            System.out.println("Something went very wrong with this insert!");
+        }
+
+
     }
 
 }
