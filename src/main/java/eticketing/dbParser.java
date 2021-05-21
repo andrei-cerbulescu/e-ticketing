@@ -85,4 +85,28 @@ public class dbParser {
         return avenues;
     }
 
+    public static Vector<band> readBandsFromDB(){
+
+        Vector<band> bands = new Vector<>();
+        String sql = "SELECT * FROM BANDS";
+
+        try{
+            Statement stmt = DbConnection.getDataBaseConnection().createStatement();
+            ResultSet result = stmt.executeQuery(sql);
+
+            while(result.next()){
+
+                bands.add(new band(result.getString(2)));
+
+            }
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return bands;
+
+    }
+
 }

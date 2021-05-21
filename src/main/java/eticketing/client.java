@@ -14,7 +14,7 @@ public class client extends person {
         this.name = name;
         this.surname = surname;
         this.age = age;
-
+        this.tickets = new Vector<ticket>();
     }
 
     client(){

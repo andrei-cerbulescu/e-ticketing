@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
+import java.util.Vector;
 
 public class actions {
 
@@ -19,7 +20,7 @@ public class actions {
             while (true) {
 
                 int decission;
-                System.out.println("1.Add a new client \n2.Create a group \n3.Add person to group \n4.Remove person from group \n5.Buy a ticket \n6.Transfer a ticket \n7.Create an event \n8.Add an artist/band to the event \n9.Cancel an event \n10.Add/remove an artist from a band \n11.Delete a client \n12.Transfer an artist \n13.Database commands");
+                System.out.println("1.Add a new client \n2.Create a group \n3.Add person to group \n4.Remove person from group \n5.Buy a ticket \n6.Transfer a ticket \n7.Create an event \n8.Add an artist/band to the event \n9.Cancel an event \n10.Add/remove an artist from a band \n11.Delete a client \n12.Transfer an artist \n13.Database commands \n14.List all elements in a vector \n15.Print all tickets of an user \n16.Print all people from a group");
 
                 decission = Integer.parseInt(reader.nextLine());
 
@@ -80,7 +81,8 @@ public class actions {
                     eventIndex = Integer.parseInt(reader.nextLine());
 
                     if(vectorWrapper.getEventVector().elementAt(eventIndex).getLocation().getMinAge()<=vectorWrapper.getClientVector().elementAt(personIndex).getAge()){
-                        vectorWrapper.getClientVector().elementAt(personIndex).getTickets().add(new ticket(vectorWrapper.getClientVector().elementAt(personIndex), vectorWrapper.getEventVector().elementAt(eventIndex)));
+                        client curentClient = vectorWrapper.getClientVector().elementAt(personIndex);
+                        curentClient.getTickets().add(new ticket(curentClient, vectorWrapper.getEventVector().elementAt(eventIndex)));
                         vectorWrapper.getEventVector().elementAt(eventIndex).increaseTicketsSold(1);
                         logger.getLogger().writeToAudit(vectorWrapper.getClientVector().elementAt(personIndex) + " bought a ticket to "+vectorWrapper.getEventVector().elementAt(eventIndex));
                     }
@@ -224,11 +226,95 @@ public class actions {
                     dbDecissions();
                 }
 
+                if(decission==14){
+                    listElementsInVector();
+                }
+
+                if(decission==15){
+                    printTicketsOfClient();
+                }
+
             }
         }
         catch(Exception e){
             e.printStackTrace();
         }
+
+    }
+
+    public static void printTicketsOfClient(){
+
+        Scanner reader = new Scanner(new InputStreamReader(System.in));
+        System.out.println("Insert person index:");
+        int personIndex = Integer.parseInt(reader.nextLine());
+        Vector<ticket> ticketVector = vectorWrapper.getClientVector().elementAt(personIndex).getTickets();
+
+        for (ticket element:ticketVector
+             ) {
+
+            System.out.println(element);
+
+        }
+
+        System.out.println("\n");
+
+    }
+
+    public static void listElementsInVector(){
+
+        Scanner reader = new Scanner(new InputStreamReader(System.in));
+        System.out.println("What do you want to print?\n1.Groups\n2.Clients\n3.Avenues\n4.Artists\n5.Bands\n6.Events\n");
+        int decission = Integer.parseInt(reader.nextLine());
+        int index = 0;
+        
+        if(decission == 1){
+            for (group element:vectorWrapper.getGroups()
+                 ) {
+                System.out.println(index+" "+element);
+                index++;
+            }
+        }
+
+        if(decission == 2){
+            for (client element:vectorWrapper.getClientVector()
+                 ) {
+                System.out.println(index+" "+element);
+                index++;
+            }
+        }
+
+        if(decission == 3){
+            for (avenue element:vectorWrapper.getAvenueVector()
+                 ) {
+                System.out.println(index+" "+element);
+                index++;
+            }
+        }
+
+        if(decission == 4){
+            for (artist element:vectorWrapper.getArtistVector()
+                 ) {
+                System.out.println(index+" "+element);
+                index++;
+            }
+        }
+
+        if(decission == 5){
+            for (band element:vectorWrapper.getBandVector()
+                 ) {
+                System.out.println(index+" "+element);
+                index++;
+            }
+        }
+        if(decission == 6){
+            for (event element:vectorWrapper.getEventVector()
+            ) {
+                System.out.println(index+" "+element);
+                index++;
+            }
+        }
+        System.out.println();
+
 
     }
 
@@ -254,6 +340,7 @@ public class actions {
                 String sql = "";
                 if(decission == 2){
                     sql = "SELECT * FROM "+ reader.nextLine();
+                    logger.getLogger().writeToAudit("Ran database command "+sql);
                     sqlRead(sql);
                 }
 
@@ -263,6 +350,7 @@ public class actions {
                         System.out.println("Input ID");
                         sql = sql + reader.nextLine();
                         System.out.println(sql);
+                        logger.getLogger().writeToAudit("Ran database command "+sql);
                         DbConnection.getDataBaseConnection().createStatement().execute(sql);
                     }
                     catch(Exception e){
@@ -319,6 +407,7 @@ public class actions {
         sql+=reader.nextLine();
         System.out.println(sql);
         try {
+            logger.getLogger().writeToAudit("Ran database command "+sql);
             DbConnection.getDataBaseConnection().createStatement().execute(sql);
         }
         catch(Exception e){
@@ -370,6 +459,7 @@ public class actions {
             }
             sql+=")";
             System.out.println(sql);
+            logger.getLogger().writeToAudit("Ran database command "+sql);
             DbConnection.getDataBaseConnection().createStatement().executeUpdate(sql);
 
         }

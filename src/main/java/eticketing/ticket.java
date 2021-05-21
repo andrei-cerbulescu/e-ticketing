@@ -23,4 +23,9 @@ public class ticket {
     public void setThisClient(client thisClient) {
         this.thisClient = thisClient;
     }
+
+    @Override
+    public String toString(){
+        return "ticket id:"+this.ticketID+"\nevent:"+this.thisEvent+"\n";
+    }
 }
