@@ -19,6 +19,10 @@ public class band {
 
     }
 
+    public Vector<artist> getArtists() {
+        return artists;
+    }
+
     public artist getArtistAtPosition(int position){
         return this.artists.elementAt(position);
     }

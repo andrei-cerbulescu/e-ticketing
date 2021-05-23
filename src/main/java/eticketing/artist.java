@@ -20,4 +20,9 @@ public class artist extends person{
         this.band=newBand;
     }
 
+    public boolean hasBand(){
+        if(this.band == null) return false;
+        return true;
+    }
+
 }

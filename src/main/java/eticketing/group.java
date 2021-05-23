@@ -6,6 +6,16 @@ public class group {
 
     private Vector<client> clients;
 
+    public void addClient(client toBeAdded){
+
+        clients.add(toBeAdded);
+
+    }
+
+    public void removeClient(int index){
+        clients.remove(index);
+    }
+
     public Vector<client> getClients() {
         return clients;
     }

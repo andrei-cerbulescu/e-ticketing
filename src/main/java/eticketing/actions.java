@@ -20,7 +20,12 @@ public class actions {
             while (true) {
 
                 int decission;
-                System.out.println("1.Add a new client \n2.Create a group \n3.Add person to group \n4.Remove person from group \n5.Buy a ticket \n6.Transfer a ticket \n7.Create an event \n8.Add an artist/band to the event \n9.Cancel an event \n10.Add/remove an artist from a band \n11.Delete a client \n12.Transfer an artist \n13.Database commands \n14.List all elements in a vector \n15.Print all tickets of an user \n16.Print all people from a group");
+                System.out.println(
+                                "1.Add a new client \n2.Create a group \n3.Add person to group \n4.Remove person from group "+
+                                "\n5.Buy a ticket \n6.Transfer a ticket \n7.Create an event \n8.Add an artist/band to the event "+
+                                "\n9.Cancel an event \n10.Add/remove an artist from a band \n11.Delete a client \n12.Transfer an artist "+
+                                        "\n13.Database commands \n14.List all elements in a vector \n15.Print all tickets of an user \n16.Print all people from a group "+
+                                        "\n17.Print all members from a band \n18.Add artist to band");
 
                 decission = Integer.parseInt(reader.nextLine());
 
@@ -52,7 +57,7 @@ public class actions {
                     System.out.println("Person Index:");
                     personIndex = Integer.parseInt(reader.nextLine());
 
-                    vectorWrapper.getGroups().elementAt(groupIndex).getClients().add(vectorWrapper.getClientVector().elementAt(personIndex));
+                    vectorWrapper.getGroups().elementAt(groupIndex).addClient(vectorWrapper.getClientVector().elementAt(personIndex));
 
                     logger.getLogger().writeToAudit(vectorWrapper.getClientVector().elementAt(personIndex)+" added to group with index "+groupIndex);
 
@@ -66,7 +71,7 @@ public class actions {
                     System.out.println("Person Index:");
                     personIndex = Integer.parseInt(reader.nextLine());
 
-                    vectorWrapper.getGroups().elementAt(groupIndex).getClients().remove(personIndex);
+                    vectorWrapper.getGroups().elementAt(groupIndex).removeClient(personIndex);
 
                     logger.getLogger().writeToAudit(vectorWrapper.getClientVector().elementAt(personIndex)+" removed from group with index "+groupIndex);
 
@@ -231,7 +236,30 @@ public class actions {
                 }
 
                 if(decission==15){
-                    printTicketsOfClient();
+                    System.out.println("Insert person index:");
+                    int personIndex = Integer.parseInt(reader.nextLine());
+                    printTicketsOfClient(personIndex);
+                }
+
+                if(decission==16){
+                    System.out.println("Insert group index:");
+                    int grooupIndex = Integer.parseInt(reader.nextLine());
+                    printMembersOfGroup(grooupIndex);
+                }
+
+                if(decission==17){
+                    System.out.println("Insert band index:");
+                    int bandIndex = Integer.parseInt(reader.nextLine());
+                    printMembersOfBand(bandIndex);
+                }
+
+                if(decission==18){
+                    System.out.println("Insert artist index:");
+                    int artistIndex = Integer.parseInt(reader.nextLine());
+
+                    System.out.println("Insert band index:");
+                    int bandIndex = Integer.parseInt(reader.nextLine());
+                    addArtistToBand(artistIndex, bandIndex);
                 }
 
             }
@@ -242,17 +270,60 @@ public class actions {
 
     }
 
-    public static void printTicketsOfClient(){
+    public static void addArtistToBand(int artistIndex, int bandIndex){
+
+        artist thisArtist = vectorWrapper.getArtistVector().elementAt(artistIndex);
+        band thisBand = vectorWrapper.getBandVector().elementAt(bandIndex);
+
+        if(thisArtist.hasBand() == true){
+            System.out.println("This artist is already part of a band");
+        }
+        else{
+
+            thisArtist.setBand(thisBand);
+            thisBand.addArtist(thisArtist);
+
+        }
+
+    }
+
+    public static void printMembersOfBand(int bandIndex){
+        band thisBand = vectorWrapper.getBandVector().elementAt(bandIndex);
+        int index = 0;
+        for (artist element:thisBand.getArtists()
+             ) {
+            System.out.println(index+ " "+element);
+            index++;
+        }
+
+    }
+
+    public static void printMembersOfGroup(int groupIndex){
+        int index = 0;
+
+        group thisGroup = vectorWrapper.getGroups().elementAt(groupIndex);
+        for (client element:thisGroup.getClients()
+             ) {
+
+            System.out.println(index+ " "+element);
+            index++;
+
+        }
+
+    }
+
+    public static void printTicketsOfClient(int personIndex){
 
         Scanner reader = new Scanner(new InputStreamReader(System.in));
-        System.out.println("Insert person index:");
-        int personIndex = Integer.parseInt(reader.nextLine());
         Vector<ticket> ticketVector = vectorWrapper.getClientVector().elementAt(personIndex).getTickets();
+
+        int index = 0;
 
         for (ticket element:ticketVector
              ) {
 
-            System.out.println(element);
+            System.out.println(index+" "+element);
+            index++;
 
         }
 
