@@ -25,7 +25,7 @@ public class actions {
                                 "\n5.Buy a ticket \n6.Transfer a ticket \n7.Create an event \n8.Add an artist/band to the event "+
                                 "\n9.Cancel an event \n10.Add/remove an artist from a band \n11.Delete a client \n12.Transfer an artist "+
                                         "\n13.Database commands \n14.List all elements in a vector \n15.Print all tickets of an user \n16.Print all people from a group "+
-                                        "\n17.Print all members from a band \n18.Add artist to band");
+                                        "\n17.Print all members from a band");
 
                 decission = Integer.parseInt(reader.nextLine());
 
@@ -181,11 +181,12 @@ public class actions {
 
                     int decission2 = Integer.parseInt(reader.nextLine());
                     if(decission2==1){
-                        System.out.println("Input artist index:");
+                        System.out.println("Insert artist index:");
                         int artistIndex = Integer.parseInt(reader.nextLine());
-                        System.out.println("Input band index:");
+
+                        System.out.println("Insert band index:");
                         int bandIndex = Integer.parseInt(reader.nextLine());
-                        vectorWrapper.getBandVector().elementAt(bandIndex).addArtist(vectorWrapper.getArtistVector().elementAt(artistIndex));
+                        addArtistToBand(artistIndex, bandIndex);
                         logger.getLogger().writeToAudit(vectorWrapper.getArtistVector().elementAt(artistIndex)+" was added to "+vectorWrapper.getBandVector().elementAt(bandIndex));
                     }
 
@@ -251,15 +252,6 @@ public class actions {
                     System.out.println("Insert band index:");
                     int bandIndex = Integer.parseInt(reader.nextLine());
                     printMembersOfBand(bandIndex);
-                }
-
-                if(decission==18){
-                    System.out.println("Insert artist index:");
-                    int artistIndex = Integer.parseInt(reader.nextLine());
-
-                    System.out.println("Insert band index:");
-                    int bandIndex = Integer.parseInt(reader.nextLine());
-                    addArtistToBand(artistIndex, bandIndex);
                 }
 
             }

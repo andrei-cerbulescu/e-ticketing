@@ -31,4 +31,9 @@ public class band {
         artists.remove(position);
     }
 
+    @Override
+    public String toString(){
+        return this.name;
+    }
+
 }
