@@ -42,10 +42,10 @@ public class logger {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, eventName);
             statement.setString(2, new SimpleDateFormat("yyyy.MM.dd HH.mm.ss").format(new java.util.Date()));
-
             statement.executeUpdate();
         }
         catch (SQLException exception){
+            exception.printStackTrace();
             System.err.println("Cannot insert into table");
         }
 

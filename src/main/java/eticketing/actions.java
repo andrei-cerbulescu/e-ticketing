@@ -25,7 +25,7 @@ public class actions {
                                 "\n5.Buy a ticket \n6.Transfer a ticket \n7.Create an event \n8.Add an artist/band to the event "+
                                 "\n9.Cancel an event \n10.Add/remove an artist from a band \n11.Delete a client \n12.Transfer an artist "+
                                         "\n13.Database commands \n14.List all elements in a vector \n15.Print all tickets of an user \n16.Print all people from a group "+
-                                        "\n17.Print all members from a band");
+                                        "\n17.Print all members from a band \n99.Exit");
 
                 decission = Integer.parseInt(reader.nextLine());
 
@@ -254,6 +254,10 @@ public class actions {
                     printMembersOfBand(bandIndex);
                 }
 
+                if(decission == 99){
+                    break;
+                }
+
             }
         }
         catch(Exception e){
@@ -387,8 +391,12 @@ public class actions {
 
         while(true){
 
-            System.out.println("1.Create\n2.Read\n3.Update\n4.Delete");
+            System.out.println("1.Create\n2.Read\n3.Update\n4.Delete\n5.Exit");
             int decission = Integer.parseInt(reader.nextLine());
+
+            if(decission == 5){
+                break;
+            }
 
             if(decission == 3){
                 sqlUpdate();
@@ -450,32 +458,44 @@ public class actions {
     public static void sqlUpdate(){
         Scanner reader = new Scanner(new InputStreamReader(System.in));
         printAllTables();
-        String sql = "UPDATE "+ reader.nextLine()+" SET ";
+        String table = reader.nextLine();
+        String sql = "UPDATE "+ table+" SET ";
+        try{
+            ResultSet results = DbConnection.getDataBaseConnection().createStatement().executeQuery("SELECT * FROM " + table +" WHERE ID = -1");
+            System.out.println("Number of columns you want to update:");
+            int numberOfColumns = Integer.parseInt(reader.nextLine());
+            for(int i=0;i<numberOfColumns;i++){
 
-        System.out.println("Number of columns you want to update:");
-        int numberOfColumns = Integer.parseInt(reader.nextLine());
-        for(int i=0;i<numberOfColumns;i++){
-            System.out.println("Column name: ");
-            sql+= reader.nextLine()+" = ";
+                for(int j=2;j<=results.getMetaData().getColumnCount();j++) {
+                    System.out.println(results.getMetaData().getColumnName(j));
+                }
 
-            System.out.println("New value: ");
-            sql+= '"'+reader.nextLine()+'"';
-            if(i != numberOfColumns-1){
-                sql+=", ";
+                System.out.println("Column name: ");
+                sql+= reader.nextLine()+" = ";
+
+                System.out.println("New value: ");
+                sql+= '"'+reader.nextLine()+'"';
+                if(i != numberOfColumns-1){
+                    sql+=", ";
+                }
             }
-        }
 
-        sql +=" WHERE id = ";
-        System.out.println("Insert id: ");
-        sql+=reader.nextLine();
-        System.out.println(sql);
-        try {
-            logger.getLogger().writeToAudit("Ran database command "+sql);
-            DbConnection.getDataBaseConnection().createStatement().execute(sql);
+            sql +=" WHERE id = ";
+            System.out.println("Insert id: ");
+            sql+=reader.nextLine();
+            try {
+                logger.getLogger().writeToAudit("Ran database command "+sql);
+                DbConnection.getDataBaseConnection().createStatement().execute(sql);
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
         }
         catch(Exception e){
             e.printStackTrace();
         }
+
+
     }
 
     public static void printAllTables(){
